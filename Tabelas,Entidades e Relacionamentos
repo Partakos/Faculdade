@@ -1,0 +1,72 @@
+Entidades e Relacionamentos
+  Entidades:
+  
+    Usuários (usuarios): Representa os participantes da rede social, podendo ser recrutadores ou candidatos.
+  
+    Publicações (publicacoes): Representa posts criados pelos usuários.
+  
+    Conexões (conexoes): Representa as conexões entre usuários, com status como "pendente", "aceito" ou "rejeitado".
+  
+    Habilidades (habilidades): Representa as competências e níveis de proficiência dos usuários.
+  
+    Mensagens (mensagens): Representa as mensagens privadas trocadas entre usuários.
+
+  Relacionamentos:  
+    usuarios ↔ publicacoes:
+      Relacionamento de 1
+      (um usuário pode ter várias publicações, mas cada publicação pertence a apenas um usuário).
+
+    usuarios ↔ conexoes:
+      Relacionamento de N
+      (um usuário pode estar conectado a vários outros usuários).
+    usuarios ↔ habilidades:
+      Relacionamento de 1
+      (um usuário pode ter várias habilidades, mas cada habilidade pertence a apenas um usuário).
+    usuarios ↔ mensagens:
+      Relacionamento de 1
+      em dois papéis (um usuário pode ser remetente ou destinatário de várias mensagens, mas cada mensagem tem um único remetente e um único destinatário).
+
+Tabelas:
+  1. usuarios
+    Representa os usuários da rede social.
+      Atributos principais:
+        usuario_id (chave primária)
+        nome
+        email (único)
+        cpf (único)
+        e_recrutador
+        e_candidato
+        senha
+        biografia
+        foto_perfil
+  2. publicacoes
+    Representa as publicações feitas pelos usuários.
+    Atributos principais:
+    publicacao_id (chave primária)
+    usuario_id (chave estrangeira para usuarios)
+    conteudo
+    data_criacao
+  3. conexoes
+    Representa as conexões entre usuários, similar a solicitações de amizade.
+      Atributos principais:
+        conexao_id (chave primária)
+        usuario1_id (chave estrangeira para usuarios)
+        usuario2_id (chave estrangeira para usuarios)
+        status (pendente, aceito, rejeitado)
+        data_criacao
+  4. habilidades
+    Representa as habilidades listadas pelos usuários.
+      Atributos principais:
+        habilidade_id (chave primária)
+        usuario_id (chave estrangeira para usuarios)
+        nome_habilidade
+        nivel_proficiencia (iniciante, intermediário, avançado, expert)
+  5. mensagens
+    Representa mensagens privadas trocadas entre os usuários.
+      Atributos principais:
+        mensagem_id (chave primária)
+        remetente_id (chave estrangeira para usuarios)
+        destinatario_id (chave estrangeira para usuarios)
+        conteudo
+        data_envio
+        foi_lida
