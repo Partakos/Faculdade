@@ -1,0 +1,42 @@
+Integridade 
+  A integridade referencial por usar chaves estrangeiras (FOREIGN KEY).
+
+Exemplos:
+  Tabela publicacoes:
+  A coluna usuario_id é uma chave estrangeira que referencia usuarios(usuario_id).
+  Se um usuário for excluído, as publicações associadas a ele também são removidas automaticamente por usarmos ON DELETE CASCADE.
+
+Tabela conexoes:
+  usuario1_id e usuario2_id são chaves estrangeiras que referenciam usuarios(usuario_id).
+  Conexões são excluídas automaticamente caso algum dos usuários seja apagado (ON DELETE CASCADE).
+
+Tabela mensagens:
+  remetente_id e destinatario_id são chaves estrangeiras que também referenciam usuarios(usuario_id).
+  Mensagens associadas a um usuário são apagadas se o usuário correspondente for excluído (ON DELETE CASCADE).
+  Integridade de Dados
+
+É garantida através de:
+  Restrições (CHECK):
+
+Tabela usuarios:
+  A restrição chk_papeis_usuario impede que um usuário seja ao mesmo tempo recrutador e candidato (NOT (e_recrutador AND e_candidato)).
+
+Tabela conexoes:
+  A coluna status só aceita os valores 'pendente', 'aceito' ou 'rejeitado'.
+
+Tabela habilidades:
+  A coluna nivel_proficiencia só permite os valores 'iniciante', 'intermediario', 'avancado' ou 'expert'.
+
+Tipos de Dados e Unicidade:
+  A tabela usuarios garante que:
+    email e cpf são únicos (UNIQUE).
+    A senha não pode ser nula (NOT NULL).
+    Tabelas como publicacoes e mensagens garantem que as colunas de conteúdo não podem ser nulas. 
+
+Chaves Primárias (PRIMARY KEY):
+  Cada tabela tem uma chave primária para identificar registros de forma única, como usuario_id em usuarios ou publicacao_id em publicacoes.
+
+Por que a integridade é importante neste modelo?
+  Confiabilidade dos dados: A integridade referencial evita registros "órfãos" (ex.: uma publicação sem um usuário correspondente).
+  Validação: Restrições CHECK e regras de unicidade asseguram que os dados seguem regras do negócio.
+  Manutenção da estrutura relacional: O uso de FOREIGN KEY mantém consistência entre as tabelas.
