@@ -136,3 +136,10 @@ VALUES (
     8000.00, 
     '2024-12-31'
 );
+
+
+ALTER TABLE usuarios
+ADD CONSTRAINT chk_cpf_format CHECK (cpf ~ '^\d{11}$');
+
+ALTER TABLE publicacoes
+ADD CONSTRAINT chk_conteudo_length CHECK (length(conteudo) > 0 AND length(conteudo) <= 5000);
